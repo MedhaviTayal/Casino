@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+int main() {
+    srand(time(0)); // Seed for random number generation
+
+    int balance = 1000; // Initial balance
+    int bet;
+
+    cout << "Welcome to the Casino Number Guessing Game!" << endl;
+
+    while (balance > 0) {
+        int numberToGuess = rand() % 10 + 1; // Random number between 1 and 10
+        int playerGuess;
+
+        cout << "\nYour current balance: $" << balance << endl;
+        cout << "Place your bet: $";
+        cin >> bet;
+
+        if (bet > balance || bet <= 0) {
+            cout << "Invalid bet amount. Please place a valid bet." << endl;
+            continue;
+        }
+
+        cout << "Guess a number between 1 and 10: ";
+        cin >> playerGuess;
+
+        cout << "The number was: " << numberToGuess << endl;
+
+        if (playerGuess == numberToGuess) {
+            cout << "Congratulations! You guessed the correct number. You win $" << bet << endl;
+            balance += bet;
+        } else {
+            cout << "Sorry, you guessed wrong. You lose $" << bet << endl;
+            balance -= bet;
+        }
+
+        char playAgain;
+        cout << "Do you want to play again? (y/n): ";
+        cin >> playAgain;
+
+        if (playAgain != 'y' && playAgain != 'Y') {
+            cout << "Thanks for playing! Your final balance is: $" << balance << endl;
+            break;
+        }
+    }
+
+    return 0;
+}
